@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プレゼント残り数</title>
+  <style>
+    body {
+      background-image: url('https://raw.githubusercontent.com/Tsukishima358358/ABC-/baca0bb703a5a261209d6fcd14f0b65173d6a51a/Instagram%E3%81%AE%E6%8A%95%E7%A8%BF.png');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      padding: 10px;
+      font-size: 2em;
+    }
+
+    p {
+      margin: 0;
+      padding: 10px;
+      font-size: 1.2em;
+    }
+
+    .iframe-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    iframe {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 640px;
+      height: 800px;
+      border: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      iframe {
+        height: 600px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 1.2em;
+      }
+
+      p {
+        font-size: 0.9em;
+      }
+
+      iframe {
+        height: 400px;
+      }
+    }
+  </style>
+  <script>
+    async function fetchRemainingSlots() {
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxvFHcWs3iVsUBydGkxuf7Klcx5cKTfg2JQSP8CKaWuuzHV0apFx7aWfID1aP4O-ABnaQ/exec');
+        const remainingSlots = await response.text();
+        document.getElementById('remainingSlots').innerText = `残り ${remainingSlots} 個のプレゼントがあります！`;
+      } catch (error) {
+        console.error('Error fetching remaining slots:', error);
+        document.getElementById('remainingSlots').innerText = '残りのプレゼント数を取得できませんでした。';
+      }
+    }
+
+    window.onload = fetchRemainingSlots;
+  </script>
+</head>
+<body>
+  <h1>プレゼント残り数</h1>
+  <p id="remainingSlots">残りのプレゼント数を取得中...</p>
+  <!-- Googleフォームを中央に配置するためのコンテナ -->
+  <div class="iframe-container">
+    <iframe src="https://forms.gle/C2A2nvS1m1VvFMtq7" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます...</iframe>
+  </div>
+</body>
+</html>
